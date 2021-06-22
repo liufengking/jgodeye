@@ -7,6 +7,7 @@ public class MethodTraceAdvice {
     @Advice.OnMethodEnter
     public static void enter(@Advice.Origin Class<?> clazz,
                              @Advice.Origin("#m") String methodName) {
+        ensureAgentJarLoad();
         MethodTraceStack.log(clazz.getTypeName() + "." + methodName + "()");
         MethodTraceStack.push();
     }
@@ -14,5 +15,9 @@ public class MethodTraceAdvice {
     @Advice.OnMethodExit
     public static void exit() {
         MethodTraceStack.pop();
+    }
+
+    public static void ensureAgentJarLoad() {
+
     }
 }

@@ -7,14 +7,11 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
-import java.util.Objects;
 import java.util.concurrent.LinkedBlockingQueue;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
 
 import com.lf65.model.Pair;
 import com.lf65.util.AssertUtils;
-import com.lf65.util.NamedThreadFactory;
+import com.lf65.util.ExceptionQuietly;
 
 public class MethodTraceLogger {
 
@@ -45,11 +42,7 @@ public class MethodTraceLogger {
 
     public static void log(String s) {
         String threadName = Thread.currentThread().getName();
-        try {
-            logBuffer.put(new Pair<>(threadName, s));
-        } catch (Exception e) {
-
-        }
+        ExceptionQuietly.call(() -> logBuffer.put(new Pair<>(threadName, s)));
     }
 
     public static void ensureFile(Path path) throws IOException {
@@ -62,12 +55,10 @@ public class MethodTraceLogger {
     private static void initConsumerLogTask() {
         new Thread(()->{
             while (true) {
-                try {
+                ExceptionQuietly.call(() -> {
                     Pair<String, String> pair = logBuffer.take();
                     log0(pair.getObject1(), pair.getObject2());
-                } catch (Exception e) {
-
-                }
+                });
             }
         }).start();
     }
