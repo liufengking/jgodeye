@@ -11,13 +11,13 @@ public class MethodTraceStack {
     }
     
     public static void push() {
-        preTabsThreadLocal.set(getPreTabs() + "\t");
+        preTabsThreadLocal.set(getPreTabs() + "    ");
     }
     
     public static void pop() {
         String preTabs = getPreTabs();
-        if (preTabs.length() > 1) {
-            preTabsThreadLocal.set(preTabs.substring(1));
+        if (preTabs.length() > 4) {
+            preTabsThreadLocal.set(preTabs.substring(4));
         }
     }
     

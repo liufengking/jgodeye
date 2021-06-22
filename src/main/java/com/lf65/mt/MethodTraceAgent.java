@@ -22,6 +22,6 @@ public class MethodTraceAgent {
     
     public static void initAgent(String args) {
         MethodTraceConfig.initConfig(args);
-        MethodTraceLogger.initOutPut();
+        MethodTraceLogger.initLogger();
     }
 }
