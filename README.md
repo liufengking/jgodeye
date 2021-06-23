@@ -1,12 +1,12 @@
-## method-invoke-trace
+## jgodeye
 This is an agent tool which can dynamic trace java method invoke stack.
 ### how to use
 - local environment
-  - use ```mvn clean compile package``` command to generate target jar, for example: xxx/method-invoke-trace/target/method-invoke-trace-1.0-SNAPSHOT-jar-with-dependencies.jar
-  - add jvm args ```-javaagent:xxx/method-invoke-trace/target/method-invoke-trace-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
+  - use ```mvn clean compile package``` command to generate target jar, for example: xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar
+  - add jvm args ```-javaagent:xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
 - prod environment
-  - use ```wget https://method-invoke-trace.oss-cn-beijing.aliyuncs.com/method-invoke-trace-1.0-SNAPSHOT-jar-with-dependencies.jar``` command to download the agent jar
-  - add jvm args ```-javaagent:xxx/method-invoke-trace/target/method-invoke-trace-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
+  - use ```wget https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar``` command to download the agent jar
+  - add jvm args ```-javaagent:xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
 ### trace result
 - the trace result produce each thread stack with a markdown file, actually， you can view it by ide like this
   ![avatar](imgs/example.jpeg)
@@ -15,4 +15,4 @@ This is an agent tool which can dynamic trace java method invoke stack.
 - add attach java progress 
 - idea plugin
 ### License
-The method-invoke-tracer is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+The jgodeyer is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
