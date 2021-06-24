@@ -6,7 +6,7 @@ This is an agent tool which can dynamic trace java method invoke stack.
   - add jvm args ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin``` to trace.
   - modify xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties to controll trace info 
 - prod environment
-  - use ```https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-0.0.1-bin.zip``` command to download the file 
+  - use ```wget https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-0.0.1-bin.zip``` command to download the file 
   - use ```unzip xxx/jgodeye/dist/jgodeye-0.0.1-bin.zip``` command to unzip file.
   - add jvm args ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin``` to trace.
   - modify xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties to controll trace info
