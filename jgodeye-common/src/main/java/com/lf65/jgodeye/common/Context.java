@@ -1,38 +1,65 @@
 package com.lf65.jgodeye.common;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.FileInputStream;
+import java.io.InputStream;
+import java.util.*;
 
 public class Context {
-    private static final String ARGS_JGODEYE_HOME = "jgodeyeHome";
-    public static final String ARGS_START_WITH = "startWith";
-    public static final String OUT_PUT = "outPut";
-    private static final Map<String, String> configs = new HashMap<>();
     
-    public static void initConfig(String agentArgs) {
-        AssertUtils.notBlank(agentArgs);
-        String[] argsArrs = agentArgs.split(",");
-        for (String item : argsArrs) {
-            String[] kvs = item.split(":");
-            if (kvs.length > 1) {
-                configs.put(kvs[0], kvs[1]);
-            }
-        }
+    private static final String ARGS_JGODEYE_HOME = "jgodeyeHome";
+    private static final String JGODEYE_TRACE_STARTWITH = "jgodeye.trace.package.startWith";
+    private static final String JGODEYE_TRACE_EXCLUDES = "jgodeye.trace.package.excludes";
+    private static final String JGODEYE_CONF = "jgodeye.properties";
+    private static final String JGODEYE_TRACE_PACKAGE_START = "com.lf65.jgodeye.trace";
+    
+    private static final Map<String, String> configs = new HashMap<>();
+    private static final List<String> pacakgeExcludeList = new ArrayList<>();
+    
+    public static void initContext(String jgodeyeHome) {
+        initArgsJgodeyeHome(jgodeyeHome);
+        initJgodeyeConf();
+        initPackageExcludes();
     }
     
-    public static String getArgsStartWith() {
-        return configs.get(ARGS_START_WITH);
+    private static void initJgodeyeConf() {
+        ExceptionQuietly.call(() -> {
+            InputStream inputStream = new FileInputStream(getJgodeyeHome() + JGODEYE_CONF);
+            Properties prop = new Properties();
+            prop.load(inputStream);
+            configs.putAll((Map) prop);
+        });
+    }
+    
+    private static void initArgsJgodeyeHome(String jgodeyeHome) {
+        String home = jgodeyeHome;
+        if (!home.endsWith("/")) {
+            home += "/";
+        }
+        configs.put(ARGS_JGODEYE_HOME, home);
+    }
+    
+    private static void initPackageExcludes() {
+        String packageExcludes = configs.get(JGODEYE_TRACE_EXCLUDES);
+        if (StringUtils.isBlank(packageExcludes)) {
+            return;
+        }
+        pacakgeExcludeList.addAll(Arrays.asList(packageExcludes.split(",")));
+        pacakgeExcludeList.add(JGODEYE_TRACE_PACKAGE_START);
     }
     
     public static String getJgodeyeHome() {
         return configs.get(ARGS_JGODEYE_HOME);
     }
     
+    public static String getJgodeyeTraceStartwith() {
+        return configs.get(JGODEYE_TRACE_STARTWITH);
+    }
+    
     public static String getArgsOutPut() {
-        String outPut = getJgodeyeHome();
-        if (!outPut.endsWith("/")) {
-            outPut += "/";
-        }
-        return outPut + OUT_PUT;
+        return getJgodeyeHome() + "outPut";
+    }
+    
+    public static List<String> getPacakgeExcludes() {
+        return pacakgeExcludeList;
     }
 }

@@ -10,7 +10,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>jgodeye-trace-agent</artifactId>
+    <artifactId>packaging</artifactId>
 
     <properties>
         <maven.compiler.source>8</maven.compiler.source>
@@ -18,17 +18,8 @@
     </properties>
 
     <build>
+        <finalName>jgodeye-${project.version}-bin</finalName>
         <plugins>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-                <version>3.3</version>
-            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-assembly-plugin</artifactId>
@@ -39,24 +30,32 @@
                         </goals>
                         <phase>package</phase>
                         <configuration>
-                            <finalName>jgodeye-trace-agent</finalName>
                             <appendAssemblyId>false</appendAssemblyId>
-                            <descriptorRefs>
-                                <descriptorRef>jar-with-dependencies</descriptorRef>
-                            </descriptorRefs>
-                            <archive>
-                                <manifestEntries>
-                                    <Premain-Class>com.lf65.jgodeye.trace.agent.Agent</Premain-Class>
-                                    <Agent-Class>com.lf65.jgodeye.trace.agent.Agent</Agent-Class>
-                                    <Can-Redefine-Classes>true</Can-Redefine-Classes>
-                                    <Can-Retransform-Classes>true</Can-Retransform-Classes>
-                                </manifestEntries>
-                            </archive>
+                            <descriptors>
+                                <descriptor>src/main/resources/package.xml</descriptor>
+                            </descriptors>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <tasks>
+                                <delete dir="${project.basedir}/../dist" includeemptydirs="true"/>
+                                <move file="${project.build.directory}/jgodeye-${project.version}-bin.zip" tofile="${project.basedir}/../dist/jgodeye-${project.version}-bin.zip" overwrite="true"/>
+                                <unzip src="${project.basedir}/../dist/jgodeye-${project.version}-bin.zip" dest="${project.basedir}/../dist/" overwrite="true"/>
+                            </tasks>
                         </configuration>
                     </execution>
                 </executions>
             </plugin>
         </plugins>
     </build>
-
 </project>

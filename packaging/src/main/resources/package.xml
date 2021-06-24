@@ -1,0 +1,31 @@
+<assembly>
+    <id>bin</id>
+    <formats>
+        <format>zip</format>
+    </formats>
+    <includeBaseDirectory>true</includeBaseDirectory>
+    <files>
+        <file>
+            <source>../jgodeye-trace-agent/target/jgodeye-trace-agent.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>../jgodeye-trace-core/target/jgodeye-trace-core.jar</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>../LICENSE</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+        <file>
+            <source>../README.md</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
+    </files>
+    <fileSets>
+        <fileSet>
+            <directory>../conf/</directory>
+            <outputDirectory>/</outputDirectory>
+        </fileSet>
+    </fileSets>
+</assembly>

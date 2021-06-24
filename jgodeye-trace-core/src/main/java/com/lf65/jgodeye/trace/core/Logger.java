@@ -54,14 +54,16 @@ public class Logger {
     }
     
     private static void initConsumerLogTask() {
-        new Thread(()->{
+        Thread loggerConsumerThread = new Thread(() -> {
             while (true) {
                 ExceptionQuietly.call(() -> {
                     Pair<String, String> pair = logBuffer.take();
                     log0(pair.getObject1(), pair.getObject2());
                 });
             }
-        }).start();
+        });
+        loggerConsumerThread.setDaemon(true);
+        loggerConsumerThread.start();
     }
 
     private static void log0(String threadName, String s) throws Exception {

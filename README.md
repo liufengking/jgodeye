@@ -2,14 +2,17 @@
 This is an agent tool which can dynamic trace java method invoke stack.
 ### how to use
 - local environment
-  - use ```mvn clean compile package``` command to generate target jar, for example: xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar
-  - add jvm args ```-javaagent:xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
+  - use ```mvn clean compile package``` command to generate target bin, for example, target dir: xxx/jgodeye/dist/jgodeye-0.0.1-bin
+  - add jvm args ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin``` to trace.
+  - modify xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties to controll trace info 
 - prod environment
-  - use ```wget https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar``` command to download the agent jar
-  - add jvm args ```-javaagent:xxx/jgodeye/target/jgodeye-1.0-SNAPSHOT-jar-with-dependencies.jar=startWith:xxx,outPut:xxx``` to trace.
+  - use ```https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-0.0.1-bin.zip``` command to download the file 
+  - use ```unzip xxx/jgodeye/dist/jgodeye-0.0.1-bin.zip``` command to unzip file.
+  - add jvm args ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin``` to trace.
+  - modify xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties to controll trace info
 ### trace result
 - the trace result produce each thread stack with a markdown file, actually， you can view it by ide like this
-  ![avatar](imgs/example.jpeg)
+  ![avatar](https://jgodeye.oss-cn-beijing.aliyuncs.com/example.jpeg)
 ### road map
 - more args to control trace info
 - add attach java progress 
