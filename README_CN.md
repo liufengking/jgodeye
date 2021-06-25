@@ -13,7 +13,6 @@
   - 添加jvm参数 ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin```。
   - 编辑 xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties 文件,控制需要跟踪和排除的包。
 ### 跟踪结果 
-- the trace result produce each thread stack with a markdown file, actually， you can view it by ide like this
 - 神眼会把java进程的每个线程的运行时调用树输出到单独的markdown文件，可以用markdown阅读器折叠不关心的调用分支。 
   ![avatar](https://jgodeye.oss-cn-beijing.aliyuncs.com/example.jpeg)
 ### 路线

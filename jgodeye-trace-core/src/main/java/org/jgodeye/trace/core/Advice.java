@@ -12,8 +12,8 @@ public class Advice {
         if (excludesContains(clazz.getTypeName())) {
             return;
         }
-        org.jgodeye.trace.core.PreTabStack.log(clazz.getTypeName() + "." + methodName + "()");
-        org.jgodeye.trace.core.PreTabStack.push();
+        PreTabStack.log(clazz.getTypeName() + "." + methodName + "()");
+        PreTabStack.push();
     }
     
     @net.bytebuddy.asm.Advice.OnMethodExit
@@ -21,7 +21,7 @@ public class Advice {
         if (excludesContains(clazz.getTypeName())) {
             return;
         }
-        org.jgodeye.trace.core.PreTabStack.pop();
+        PreTabStack.pop();
     }
     
     public static boolean excludesContains(String typeName) {
