@@ -1,4 +1,4 @@
-package com.lf65.jgodeye.common;
+package org.jgodeye.common;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;

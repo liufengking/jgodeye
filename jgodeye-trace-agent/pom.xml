@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <parent>
         <artifactId>jgodeye</artifactId>
-        <groupId>com.lf65.jgodeye</groupId>
+        <groupId>org.jgodeye</groupId>
         <version>${revision}</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
@@ -46,8 +46,8 @@
                             </descriptorRefs>
                             <archive>
                                 <manifestEntries>
-                                    <Premain-Class>com.lf65.jgodeye.trace.agent.Agent</Premain-Class>
-                                    <Agent-Class>com.lf65.jgodeye.trace.agent.Agent</Agent-Class>
+                                    <Premain-Class>org.jgodeye.trace.agent.Agent</Premain-Class>
+                                    <Agent-Class>org.jgodeye.trace.agent.Agent</Agent-Class>
                                     <Can-Redefine-Classes>true</Can-Redefine-Classes>
                                     <Can-Retransform-Classes>true</Can-Retransform-Classes>
                                 </manifestEntries>

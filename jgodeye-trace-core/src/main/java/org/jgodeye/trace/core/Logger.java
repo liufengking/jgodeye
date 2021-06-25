@@ -1,9 +1,9 @@
-package com.lf65.jgodeye.trace.core;
+package org.jgodeye.trace.core;
 
-import com.lf65.jgodeye.common.AssertUtils;
-import com.lf65.jgodeye.common.Context;
-import com.lf65.jgodeye.common.ExceptionQuietly;
-import com.lf65.jgodeye.common.Pair;
+import org.jgodeye.common.AssertUtils;
+import org.jgodeye.common.Context;
+import org.jgodeye.common.ExceptionQuietly;
+import org.jgodeye.common.Pair;
 
 import java.io.File;
 import java.io.IOException;

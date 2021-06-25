@@ -1,4 +1,4 @@
-package com.lf65.jgodeye.common;
+package org.jgodeye.common;
 
 public class ExceptionQuietly {
 

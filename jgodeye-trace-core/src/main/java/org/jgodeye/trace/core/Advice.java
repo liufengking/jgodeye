@@ -1,6 +1,6 @@
-package com.lf65.jgodeye.trace.core;
+package org.jgodeye.trace.core;
 
-import com.lf65.jgodeye.common.Context;
+import org.jgodeye.common.Context;
 
 import java.util.List;
 
@@ -12,8 +12,8 @@ public class Advice {
         if (excludesContains(clazz.getTypeName())) {
             return;
         }
-        PreTabStack.log(clazz.getTypeName() + "." + methodName + "()");
-        PreTabStack.push();
+        org.jgodeye.trace.core.PreTabStack.log(clazz.getTypeName() + "." + methodName + "()");
+        org.jgodeye.trace.core.PreTabStack.push();
     }
     
     @net.bytebuddy.asm.Advice.OnMethodExit
@@ -21,7 +21,7 @@ public class Advice {
         if (excludesContains(clazz.getTypeName())) {
             return;
         }
-        PreTabStack.pop();
+        org.jgodeye.trace.core.PreTabStack.pop();
     }
     
     public static boolean excludesContains(String typeName) {

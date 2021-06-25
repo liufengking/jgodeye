@@ -1,4 +1,4 @@
-package com.lf65.jgodeye.common;
+package org.jgodeye.common;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
@@ -10,7 +10,7 @@ public class Context {
     private static final String JGODEYE_TRACE_STARTWITH = "jgodeye.trace.package.startWith";
     private static final String JGODEYE_TRACE_EXCLUDES = "jgodeye.trace.package.excludes";
     private static final String JGODEYE_CONF = "jgodeye.properties";
-    private static final String JGODEYE_TRACE_PACKAGE_START = "com.lf65.jgodeye.trace";
+    private static final String JGODEYE_TRACE_PACKAGE_START = "org.jgodeye.trace";
     
     private static final Map<String, String> configs = new HashMap<>();
     private static final List<String> pacakgeExcludeList = new ArrayList<>();

@@ -1,6 +1,6 @@
-package com.lf65.jgodeye.trace.core;
+package org.jgodeye.trace.core;
 
-import com.lf65.jgodeye.common.Context;
+import org.jgodeye.common.Context;
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.matcher.ElementMatchers;
 

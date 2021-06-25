@@ -1,4 +1,4 @@
-package com.lf65.jgodeye.trace.agent;
+package org.jgodeye.trace.agent;
 
 import java.io.File;
 import java.lang.instrument.Instrumentation;
@@ -11,7 +11,7 @@ import java.util.Map;
 public class Agent {
     
     private static final String ARGS_JGODEYE_HOME = "jgodeyeHome";
-    private static final String JGODEYE_TRACE_CORE_BOOTSTRAP = "com.lf65.jgodeye.trace.core.Bootstrap";
+    private static final String JGODEYE_TRACE_CORE_BOOTSTRAP = "org.jgodeye.trace.core.Bootstrap";
     private static final String JGODEYE_TRACE_CORE_JAR = "jgodeye-trace-core.jar";
     
     private static final Map<String, String> configs = new HashMap<>();

@@ -1,7 +1,7 @@
-package com.lf65.jgodeye.trace.core;
+package org.jgodeye.trace.core;
 
 
-import com.lf65.jgodeye.common.StringUtils;
+import org.jgodeye.common.StringUtils;
 
 public class PreTabStack {
     
