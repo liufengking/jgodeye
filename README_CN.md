@@ -1,7 +1,7 @@
 **中文** | [English](README.md)
 ## jgodeye
 ![avatar](https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye.png)
-神眼是一个以上帝视角俯瞰java程序的源码分析工具,可以用来生成java程序运行时调用脉络树。
+- 神眼是一个以上帝视角俯瞰java程序的源码分析工具,可以用来生成java程序运行时调用脉络树。
 ### 快速开始 
 - 调试环境 
   - 使用maven命令 ```mvn clean compile package``` 打包生成dist目录: xxx/jgodeye/dist/jgodeye-0.0.1-bin。

@@ -21,6 +21,10 @@
             <source>../README.md</source>
             <outputDirectory>/</outputDirectory>
         </file>
+        <file>
+            <source>../README_CN.md</source>
+            <outputDirectory>/</outputDirectory>
+        </file>
     </files>
     <fileSets>
         <fileSet>

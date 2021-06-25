@@ -1,7 +1,7 @@
 [中文](README_CN.md) | **English**
 ## jgodeye
 ![avatar](https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye.png)
-This is an agent tool which can dynamic trace java method invoke stack.
+- This is an agent tool which can dynamic trace java method invoke stack.
 ### how to use
 - local environment
   - use ```mvn clean compile package``` command to generate target bin, for example, target dir: xxx/jgodeye/dist/jgodeye-0.0.1-bin
