@@ -1,4 +1,5 @@
 ## jgodeye
+![avatar](https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye.png)
 This is an agent tool which can dynamic trace java method invoke stack.
 ### how to use
 - local environment
@@ -18,4 +19,4 @@ This is an agent tool which can dynamic trace java method invoke stack.
 - add attach java progress 
 - idea plugin
 ### License
-The jgodeyer is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
+The jgodeye is released under version 2.0 of the [Apache License](https://www.apache.org/licenses/LICENSE-2.0).
