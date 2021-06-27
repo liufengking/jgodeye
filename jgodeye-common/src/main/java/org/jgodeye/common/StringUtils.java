@@ -1,13 +1,13 @@
 package org.jgodeye.common;
 
 public class StringUtils {
-    
+
     public static String EMPTY = "";
-    
+
     public static int length(final CharSequence cs) {
         return cs == null ? 0 : cs.length();
     }
-    
+
     public static boolean isBlank(final CharSequence cs) {
         final int strLen = length(cs);
         if (strLen == 0) {
