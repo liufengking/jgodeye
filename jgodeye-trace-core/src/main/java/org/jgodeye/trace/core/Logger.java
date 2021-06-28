@@ -84,7 +84,7 @@ public class Logger {
         StringBuilder threadTraceInfoBuffer = threadTraceInfoBuffers.get(threadName);
 
         if (null == threadTraceInfoBuffer) {
-            threadTraceInfoBuffer = new StringBuilder();
+            threadTraceInfoBuffer = new StringBuilder(Constants.JGODEYE_TRACE_BUF_LEN);
             threadTraceInfoBuffers.put(threadName, threadTraceInfoBuffer);
         }
 
@@ -104,7 +104,7 @@ public class Logger {
             ensureFile(path);
 
             Files.write(path, line.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
-            threadTraceInfoBuffers.put(threadName, new StringBuilder());
+            threadTraceInfoBuffers.put(threadName, new StringBuilder(Constants.JGODEYE_TRACE_BUF_LEN));
         });
     }
 
