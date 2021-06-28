@@ -89,7 +89,7 @@ public class Logger {
         }
 
         threadTraceInfoBuffer.append(line);
-        if (threadTraceInfoBuffer.length() > 2048) {
+        if (threadTraceInfoBuffer.length() > Constants.JGODEYE_TRACE_BUF_LEN) {
             flushLog(threadName, threadTraceInfoBuffer);
         }
     }
