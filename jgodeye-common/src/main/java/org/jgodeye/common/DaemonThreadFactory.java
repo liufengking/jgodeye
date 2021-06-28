@@ -16,6 +16,7 @@ public class DaemonThreadFactory implements ThreadFactory {
     public Thread newThread(Runnable runnable) {
         Thread thread = new Thread(runnable, threadNamePrefix + "-" + counter.incrementAndGet());
         thread.setPriority(Thread.MIN_PRIORITY);
+        thread.setDaemon(true);
         return thread;
     }
 }
