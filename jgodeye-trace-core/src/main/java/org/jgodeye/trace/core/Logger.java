@@ -37,21 +37,25 @@ public class Logger {
     private static void initOutPut() {
         String outPut = Context.getArgsOutPut();
         AssertUtils.notBlank(outPut);
+
         File file = new File(outPut);
         if (!file.exists()) {
             AssertUtils.state(file.mkdirs());
             return;
         }
+
         File[] subFiles = file.listFiles();
         if (subFiles == null || subFiles.length <= 0) {
             return;
         }
+
         for (File subFile : subFiles) {
             AssertUtils.state(subFile.delete());
         }
     }
 
     private static void initConsumerLogTask() {
+
         Thread loggerConsumerThread = new Thread(() -> {
             while (true) {
                 ExceptionQuietly.call(() -> {
@@ -60,6 +64,7 @@ public class Logger {
                 });
             }
         });
+
         loggerConsumerThread.setName("jgodeye-thread-trace-info-consuer");
         loggerConsumerThread.setDaemon(true);
         loggerConsumerThread.start();
@@ -67,6 +72,7 @@ public class Logger {
 
     private static void initFlushLogTask() {
         threadTraceInfoFluser.scheduleWithFixedDelay(() -> {
+
             Set<Map.Entry<String, StringBuilder>> entries = threadTraceInfoBuffers.entrySet();
             for (Map.Entry<String, StringBuilder> entry : entries) {
                 flushLog(entry.getKey(), entry.getValue());
@@ -76,10 +82,12 @@ public class Logger {
 
     private static void appendToThreadTraceInfoBuffer(String threadName, String line) {
         StringBuilder threadTraceInfoBuffer = threadTraceInfoBuffers.get(threadName);
+
         if (null == threadTraceInfoBuffer) {
             threadTraceInfoBuffer = new StringBuilder();
             threadTraceInfoBuffers.put(threadName, threadTraceInfoBuffer);
         }
+
         threadTraceInfoBuffer.append(line);
         if (threadTraceInfoBuffer.length() > 2048) {
             flushLog(threadName, threadTraceInfoBuffer);
@@ -88,11 +96,15 @@ public class Logger {
 
     private static void flushLog(String threadName, StringBuilder line) {
         ExceptionQuietly.call(() -> {
+
             String outPut = Context.getArgsOutPut();
             AssertUtils.notBlank(outPut);
+
             Path path = Paths.get(outPut + "/" + threadName + ".md");
             ensureFile(path);
+
             Files.write(path, line.toString().getBytes(StandardCharsets.UTF_8), StandardOpenOption.APPEND);
+            threadTraceInfoBuffers.put(threadName, new StringBuilder());
         });
     }
 
