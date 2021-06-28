@@ -6,12 +6,6 @@ import java.util.*;
 
 public class Context {
 
-    private static final String ARGS_JGODEYE_HOME = "jgodeyeHome";
-    private static final String JGODEYE_TRACE_STARTWITH = "jgodeye.trace.package.startWith";
-    private static final String JGODEYE_TRACE_EXCLUDES = "jgodeye.trace.package.excludes";
-    private static final String JGODEYE_CONF = "jgodeye.properties";
-    private static final String JGODEYE_TRACE_PACKAGE_START = "org.jgodeye.trace";
-
     private static final Map<String, String> configs = new HashMap<>();
     private static final List<String> pacakgeExcludeList = new ArrayList<>();
 
@@ -23,7 +17,7 @@ public class Context {
 
     private static void initJgodeyeConf() {
         ExceptionQuietly.call(() -> {
-            InputStream inputStream = new FileInputStream(getJgodeyeHome() + JGODEYE_CONF);
+            InputStream inputStream = new FileInputStream(getJgodeyeHome() + Constants.JGODEYE_CONF);
             Properties prop = new Properties();
             prop.load(inputStream);
             configs.putAll((Map) prop);
@@ -35,24 +29,24 @@ public class Context {
         if (!home.endsWith("/")) {
             home += "/";
         }
-        configs.put(ARGS_JGODEYE_HOME, home);
+        configs.put(Constants.ARGS_JGODEYE_HOME, home);
     }
 
     private static void initPackageExcludes() {
-        String packageExcludes = configs.get(JGODEYE_TRACE_EXCLUDES);
+        String packageExcludes = configs.get(Constants.JGODEYE_TRACE_EXCLUDES);
         if (StringUtils.isBlank(packageExcludes)) {
             return;
         }
         pacakgeExcludeList.addAll(Arrays.asList(packageExcludes.split(",")));
-        pacakgeExcludeList.add(JGODEYE_TRACE_PACKAGE_START);
+        pacakgeExcludeList.add(Constants.JGODEYE_TRACE_PACKAGE_START);
     }
 
     public static String getJgodeyeHome() {
-        return configs.get(ARGS_JGODEYE_HOME);
+        return configs.get(Constants.ARGS_JGODEYE_HOME);
     }
 
     public static String getJgodeyeTraceStartwith() {
-        return configs.get(JGODEYE_TRACE_STARTWITH);
+        return configs.get(Constants.JGODEYE_TRACE_STARTWITH);
     }
 
     public static String getArgsOutPut() {
