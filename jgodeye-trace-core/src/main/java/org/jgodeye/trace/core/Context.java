@@ -1,8 +1,11 @@
-package org.jgodeye.common;
+package org.jgodeye.trace.core;
 
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.*;
+import org.jgodeye.common.Constants;
+import org.jgodeye.common.ExceptionQuietly;
+import org.jgodeye.common.StringUtils;
 
 public class Context {
 

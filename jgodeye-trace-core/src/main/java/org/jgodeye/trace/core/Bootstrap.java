@@ -3,7 +3,6 @@ package org.jgodeye.trace.core;
 import java.lang.instrument.Instrumentation;
 
 import org.jgodeye.common.Constants;
-import org.jgodeye.common.Context;
 
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.NamedElement;

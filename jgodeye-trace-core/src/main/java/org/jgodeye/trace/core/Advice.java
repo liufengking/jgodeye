@@ -1,7 +1,5 @@
 package org.jgodeye.trace.core;
 
-import org.jgodeye.common.Context;
-
 import java.util.List;
 
 public class Advice {
