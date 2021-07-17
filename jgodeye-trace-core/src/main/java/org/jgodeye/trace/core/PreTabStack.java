@@ -23,7 +23,7 @@ public class PreTabStack {
 
     private static String getPreTabs() {
         String preTabs = preTabsThreadLocal.get();
-        if (null == preTabs) {
+        if (preTabs == null) {
             preTabs = StringUtils.EMPTY;
         }
         return preTabs;

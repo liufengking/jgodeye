@@ -83,7 +83,7 @@ public class Logger {
     private static void appendToThreadTraceInfoBuffer(String threadName, String line) {
         StringBuilder threadTraceInfoBuffer = threadTraceInfoBuffers.get(threadName);
 
-        if (null == threadTraceInfoBuffer) {
+        if (threadTraceInfoBuffer == null) {
             threadTraceInfoBuffer = new StringBuilder(Constants.JGODEYE_TRACE_BUF_LEN);
             threadTraceInfoBuffers.put(threadName, threadTraceInfoBuffer);
         }
