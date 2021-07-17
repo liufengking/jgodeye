@@ -9,9 +9,10 @@
     <packaging>pom</packaging>
     <version>${revision}</version>
     <modules>
+        <module>jgodeye-common</module>
         <module>jgodeye-trace-agent</module>
         <module>jgodeye-trace-core</module>
-        <module>jgodeye-common</module>
+        <module>jgodeye-blacktech</module>
         <module>packaging</module>
     </modules>
 
