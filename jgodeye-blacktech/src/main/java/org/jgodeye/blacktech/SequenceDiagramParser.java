@@ -4,10 +4,12 @@ import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Properties;
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.CharUtils;
 import org.jgodeye.common.ExceptionQuietly;
@@ -28,10 +30,18 @@ public class SequenceDiagramParser {
     };
 
     public static void main(String[] args) {
-        String input = "/Users/liufeng/SequenceDiagram.sdt";
-        String output = "/Users/liufeng/wp-test/md/tracer.md";
 
-        ExceptionQuietly.call(() -> generator(input, output));
+        ExceptionQuietly.call(() -> {
+
+            InputStream inputStream = SequenceDiagramParser.class.getResourceAsStream("/conf.properties");
+            Properties prop = new Properties();
+            prop.load(inputStream);
+
+            String input = prop.getProperty("sequence.diagram.parser.input");
+            String output = prop.getProperty("sequence.diagram.parser.output");
+
+            generator(input, output);
+        });
     }
 
     public static void generator(String input, String output) throws Exception {
