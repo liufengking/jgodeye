@@ -25,7 +25,7 @@ public class SequenceDiagramParser {
 
     // 这里可定义不关心的分支
     private static final String[] FILTER_STRS = new String[] {
-        "exception", "enums", "logger", "util",
+        "exception", "enums", "logger", "util", "Enum",
         "\"get\"", "\"set\"", "toString",
     };
 
@@ -103,7 +103,7 @@ public class SequenceDiagramParser {
                     break;
                 }
     
-                if (lines.contains(fc)) {
+                if (line.contains(fc)) {
                     filter = Boolean.TRUE;
                     preTabCount = tabCount;
                     break;
