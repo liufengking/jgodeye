@@ -25,8 +25,7 @@ public class SequenceDiagramParser {
 
     // 这里可定义不关心的分支
     private static final String[] FILTER_STRS = new String[] {
-        "exception", "enums", "logger", "util", "Enum",
-        "\"get\"", "\"set\"", "toString",
+        "exception", "enums", "logger", "util", "Enum", "toString",
     };
 
     public static void main(String[] args) {
