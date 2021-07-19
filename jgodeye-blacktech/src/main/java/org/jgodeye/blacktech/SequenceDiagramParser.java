@@ -61,7 +61,7 @@ public class SequenceDiagramParser {
         List<String> lines = getParsedLines(content, bracketList);
 
         // 过滤与匿名缩进
-        List<String> targetLines = filterLines(lines);
+        List<String> targetLines = filterAndHandleLamda(lines);
 
         dumpLines(targeFile, targetLines);
     }
@@ -84,7 +84,7 @@ public class SequenceDiagramParser {
         return bracketList;
     }
 
-    private static List<String> filterLines(List<String> lines) {
+    private static List<String> filterAndHandleLamda(List<String> lines) {
 
         List<String> targetlines = new ArrayList<>();
 
@@ -94,8 +94,26 @@ public class SequenceDiagramParser {
 
             String line = lines.get(i);
             int tabCount = line.indexOf("-");
+
+            // lamda调用缩进处理
+            if (line.contains("λ→")) {
+
+                line = line.substring(4);
+
+                for (int j = i + 1; j < lines.size(); j++) {
+                    String subLine = lines.get(j);
+                    int subTabCount = subLine.indexOf("-");
+                    if (subTabCount > tabCount) {
+                        subLine = subLine.substring(4);
+                    } else {
+                        break;
+                    }
+                    lines.set(j, subLine);
+                }
+            }
+
+            // 处理过滤
             boolean filter = Boolean.FALSE;
-            
             for (String fc : FILTER_STRS) {
     
                 if (tabCount > preTabCount) {
