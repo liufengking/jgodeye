@@ -97,9 +97,6 @@ public class SequenceDiagramParser {
 
             // lamda调用缩进处理
             if (line.contains("λ→")) {
-
-                line = line.substring(4);
-
                 for (int j = i + 1; j < lines.size(); j++) {
                     String subLine = lines.get(j);
                     int subTabCount = subLine.indexOf("-");
