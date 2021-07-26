@@ -1,14 +1,14 @@
 ## es存储结构
 ![avatar](../imgs/es-store.jpg)
 - 图1 
-ES集群由多个节点(Node)组成,elasticsearch index在es集群中是按分片(Shard)存储的，在创建索引时可以指定分片数量(制定后不能修改)和副本数量(可动态修改)。图1中的index分为3个分片，每个分片指定了2个副本。
+    - ES集群由多个节点(Node)组成,elasticsearch index在es集群中是按分片(Shard)存储的，在创建索引时可以指定分片数量(制定后不能修改)和副本数量(可动态修改)。图1中的index分为3个分片，每个分片指定了2个副本。
 - 图2 
-ES集群中的一个分片本质上就是集群几点上的一个lucene index。Elasticsearch是建立在lucene之上的。lucene是一个全文搜索java库。一个lucene index在是由多个小segment组成的。如果segment过多，与Hbase LSM Tree类似，当segment过多时，lucene会合并小segments。
+    - ES集群中的一个分片本质上就是集群几点上的一个lucene index。Elasticsearch是建立在lucene之上的。lucene是一个全文搜索java库。一个lucene index在是由多个小segment组成的。如果segment过多，与Hbase LSM Tree类似，当segment过多时，lucene会合并小segments。
 - 图3
-segment内部由很多数据结构，最重要的3个结构有：Inverted Index，Stored Fields，Document Values。
-    - Inverted Index : 一个有序的数据字典 Dictionary（包括单词 Term 和它出现的频率）。与单词 Term 对应的 Postings（即存在这个单词的文件）。
-    - Stored Field : Stored Fields 是一个简单的键值对 key-value。默认情况下，ElasticSearch 会存储整个文件的 JSON source。如果指定一些字段store为true，这意味着这个field的数据将会被单独存储。如果对某个field做了索引，则可以查询。
-    - Document Values。这种结构本质上就是一个列式的存储，它高度优化了具有相同类型的数据的存储结构，用来做排序、聚合、facet等。
+    - segment内部由很多数据结构，最重要的3个结构有：Inverted Index，Stored Fields，Document Values。
+        - Inverted Index : 一个有序的数据字典 Dictionary（包括单词 Term 和它出现的频率）。与单词 Term 对应的 Postings（即存在这个单词的文件）。
+        - Stored Field : Stored Fields 是一个简单的键值对 key-value。默认情况下，ElasticSearch 会存储整个文件的 JSON source。如果指定一些字段store为true，这意味着这个field的数据将会被单独存储。如果对某个field做了索引，则可以查询。
+        - Document Values。这种结构本质上就是一个列式的存储，它高度优化了具有相同类型的数据的存储结构，用来做排序、聚合、facet等。
 - 图4
     - lucene数据元信息文件
     文件名为：segments_xxx,该文件为lucene数据文件的元信息文件，记录所有segment的元数据信息。该文件主要记录了目前有多少segment，每个segment有一些基本信息，更新这些信息定位到每个segment的元信息文件。lucene元信息文件还支持记录userData，Elasticsearch可以在此记录translog的一些相关信息。
@@ -24,8 +24,6 @@ segment内部由很多数据结构，最重要的3个结构有：Inverted Index�
     文件后缀：.doc, .pos, .pay，.doc保存了每个term的doc id列表和term在doc中的词频，全文索引的字段，会有.pos文件，保存了term在doc中的位置，全文索引的字段，使用了一些像payloads的高级特性才会有.pay文件，保存了term在doc中的一些高级特性。
     - 列存文件（docvalues）
     Elasticsearch中的列式存储的名称，Elasticsearch除了存储原始存储、倒排索引，还存储了一份docvalues，用作分析和排序。
-
-
 
 ## es写入过程
 ## 参考
