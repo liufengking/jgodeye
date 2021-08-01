@@ -26,6 +26,14 @@
     Elasticsearch中的列式存储的名称，Elasticsearch除了存储原始存储、倒排索引，还存储了一份docvalues，用作分析和排序。
 
 ## es写入过程
+![avatar](../imgs/es-write.jpg)
+- 图1
+    - 图1是一个3个节点，2个分片，2个副本的ES集群。当写入请求到达集群后协调节点后，协调节点在进行写操作时，ES会根据传入的_routing参数（或mapping中设置的_routing, 如果参数和设置中都没有则默认使用_id), 按照公式 shard_num=hash(\routing)%num_primary_shards,计算出文档要分配到的分片，在从集群元数据中找出对应主分片的位置，将请求路由到该分片进行文档写操作。
+    - 当协调节点接受到请求后进行一系列处理，然后通过_routing字段找到对应的primary shard，并将请求转发给primary shard, primary shard完成写入后，将写入并发发送给各replica， raplica执行写入操作后返回给primary shard， primary shard再将请求返回给协调节点。可以通过wait_for_active_shards参数控制写入多少个分片成功后返回给客户端，默认1，all表示主分片和副本都写入成功后在返回客户端。
+- 图2
+    - 在lucene进行数据写入时，先将数据写入内存缓冲区，同时以追加的方式写入translog，与WAL机制不同，lucene数据写入是先写入Lucene再写入translog，原因是写入Lucene可能会失败，为了减少写入失败回滚的复杂度，因此先写入Lucene。如果发生宕机，translog可以用来恢复未持久化到磁盘的数据。
+    - 通过refresh刷新到写到文件系统缓存后，才能被索引到。每隔1秒refresh, 数据变更的时候，也支持主动调用。默认情况下，translog要在此处落盘完成，如果对可靠性要求不高，可以设置translog异步，那么translog的fsync将会异步执行，但是落盘前的数据有丢失风险。
+    - 另外每30分钟或当translog达到一定大小(由 index.translog.flush_threshold_size控制，默认512mb), ES会触发一次flush操作，此时ES会先执行refresh操作将buffer中的数据生成segment，然后调用lucene的commit方法将所有内存中的segment fsync到磁盘。此时lucene中的数据就完成了持久化，会清空translog中的数据(6.x版本为了实现sequenceIDs,不删除translog)
 ## 参考
 - [41张图解 ElasticSearch 原理](https://zhuanlan.zhihu.com/p/336889554)
 - [ES stored fields作用](https://blog.csdn.net/m0_45406092/article/details/107631883)
