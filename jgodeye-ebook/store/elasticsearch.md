@@ -34,9 +34,15 @@
     - 在lucene进行数据写入时，先将数据写入内存缓冲区，同时以追加的方式写入translog，与WAL机制不同，lucene数据写入是先写入Lucene再写入translog，原因是写入Lucene可能会失败，为了减少写入失败回滚的复杂度，因此先写入Lucene。如果发生宕机，translog可以用来恢复未持久化到磁盘的数据。
     - 通过refresh刷新到写到文件系统缓存后，才能被索引到。每隔1秒refresh, 数据变更的时候，也支持主动调用。默认情况下，translog要在此处落盘完成，如果对可靠性要求不高，可以设置translog异步，那么translog的fsync将会异步执行，但是落盘前的数据有丢失风险。
     - 另外每30分钟或当translog达到一定大小(由 index.translog.flush_threshold_size控制，默认512mb), ES会触发一次flush操作，此时ES会先执行refresh操作将buffer中的数据生成segment，然后调用lucene的commit方法将所有内存中的segment fsync到磁盘。此时lucene中的数据就完成了持久化，会清空translog中的数据(6.x版本为了实现sequenceIDs,不删除translog)
+
+## es查询过程
+- 深度分页问题
+    - 请求首先可能是打到一个不包含这个index的shard的node上去，这个node就是一个协调节点coordinate node，那么这个coordinate node就会将搜索请求转发到index的三个shard所在的node上去。比如说我们之前说的情况下，要搜索60000条数据中的第1000页，实际上每个shard都要将内部的20000条数据中的第10001~10010条数据，拿出来，不是才10条，是10010条数据。3个shard的每个shard都返回10010条数据给协调节点coordinate node，coordinate node会收到总共30030条数据，然后在这些数据中进行排序，根据_score相关度分数，然后取到10001~10010这10条数据，就是我们要的第1000页的10条数据
+
 ## 参考
 - [41张图解 ElasticSearch 原理](https://zhuanlan.zhihu.com/p/336889554)
 - [ES stored fields作用](https://blog.csdn.net/m0_45406092/article/details/107631883)
 - [详解ElasticSearch索引过程](https://www.bilibili.com/video/BV16k4y197vu)
 - [Elasticsearch中数据是如何存储的](https://elasticsearch.cn/article/6178)
+- [浅析ElasticSearch原理](https://blog.csdn.net/ZVAyIVqt0UFji/article/details/78905475)
 

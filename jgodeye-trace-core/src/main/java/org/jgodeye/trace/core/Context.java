@@ -48,8 +48,8 @@ public class Context {
         return configs.get(Constants.ARGS_JGODEYE_HOME);
     }
 
-    public static String getJgodeyeTraceStartwith() {
-        return configs.get(Constants.JGODEYE_TRACE_STARTWITH);
+    public static String getJgodeyeTraceMatches() {
+        return configs.get(Constants.JGODEYE_TRACE_MATCHES);
     }
 
     public static String getArgsOutPut() {
