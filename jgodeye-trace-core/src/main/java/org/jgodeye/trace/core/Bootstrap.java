@@ -2,13 +2,12 @@ package org.jgodeye.trace.core;
 
 import java.lang.instrument.Instrumentation;
 
-import org.jgodeye.common.Constants;
+import org.jgodeye.common.StringUtils;
 
 import net.bytebuddy.agent.builder.AgentBuilder;
 import net.bytebuddy.description.NamedElement;
 import net.bytebuddy.matcher.ElementMatcher.Junction;
 import net.bytebuddy.matcher.ElementMatchers;
-import org.jgodeye.common.StringUtils;
 
 public class Bootstrap {
 
@@ -24,7 +23,10 @@ public class Bootstrap {
 
     private static void build(Instrumentation inst) {
 
-        new AgentBuilder.Default().type(initJunction())
+        new AgentBuilder.Default()
+            .disableClassFormatChanges()
+            .with(AgentBuilder.RedefinitionStrategy.RETRANSFORMATION)
+            .type(initJunction())
             .transform(
                 ((builder, typeDescription, classLoader, module) ->
                     builder.visit(net.bytebuddy.asm.Advice.to(Advice.class).on(ElementMatchers.any())))
