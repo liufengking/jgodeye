@@ -5,14 +5,12 @@
 ### 快速开始 
 - 调试环境 
   - 使用maven命令 ```mvn clean compile package``` 打包生成dist目录: xxx/jgodeye/dist/jgodeye-0.0.1-bin。
-  - 添加jvm参数 ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.
-  - jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin -noverify```。
+  - 添加jvm参数 ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin -noverify```。
   - 编辑 xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties 文件,控制需要跟踪和排除的包。 
 - 生产环境 
   - 使用命令 ```wget https://jgodeye.oss-cn-beijing.aliyuncs.com/jgodeye-0.0.1-bin.zip``` 下载神眼安装包。 
   - 使用命令 ```unzip xxx/jgodeye/dist/jgodeye-0.0.1-bin.zip```解压安装包。 
-  - 添加jvm参数 ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.
-  - jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin -noverify```。
+  - 添加jvm参数 ```-javaagent:xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye-trace-agent.jar=jgodeyeHome:xxx/jgodeye/dist/jgodeye-0.0.1-bin -noverify```。
   - 编辑 xxx/jgodeye/dist/jgodeye-0.0.1-bin/jgodeye.properties 文件,控制需要跟踪和排除的包。
 ### 跟踪结果 
 - 神眼会把java进程的每个线程的运行时调用树输出到单独的markdown文件，可以用markdown阅读器折叠不关心的调用分支。 
