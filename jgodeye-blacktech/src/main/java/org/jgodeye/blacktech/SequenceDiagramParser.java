@@ -150,16 +150,22 @@ public class SequenceDiagramParser {
             
             // 标准的非空json串至少有4个字符
             if (index - preIndex > 4) {
-                
-                String jsonStr = content.substring(preIndex + 1, index);
-                JSONObject call = JSON.parseObject(jsonStr);
 
-                String className = call.getJSONObject("_classDescription").getString("_className");
+                int finalPreIndex = preIndex;
+                String finalTab = tab;
 
-                String line = tab + "- " + className + "." + call.getString("_methodName") + "()";
-                
-                // 根目录不用缩进
-                lines.add(line.substring(4));
+                ExceptionQuietly.call(() -> {
+                    String jsonStr = content.substring(finalPreIndex + 1, index);
+
+                    JSONObject call = JSON.parseObject(jsonStr);
+
+                    String className = call.getJSONObject("_classDescription").getString("_className");
+
+                    String line = finalTab + "- " + className + "." + call.getString("_methodName") + "()";
+
+                    // 根目录不用缩进
+                    lines.add(line.substring(4));
+                });
             }
             
             // 缩进处理
